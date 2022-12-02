@@ -18,7 +18,10 @@ async function main(){
       district: Number,
       geolocation: {
         coordinates: [Number],
-        type: String
+        type: {
+            type:String,
+            enum:['Point']
+        }
       },
       sourceLocationId: String,
       filmDirectorName: String,
@@ -42,8 +45,7 @@ async function main(){
       film.endDate = element.fields.date_fin
       film.filmName = element.fields.nom_tournage
       film.district = element.fields.ardt_lieu
-      film.coordinates = element.fields.geo_shape['coordinates']
-      film.type = element.fields.geo_shape['type']
+      film.geolocation = element.fields.geo_shape
       film.sourceLocationId = element.fields.id_lieu
       film.filmDirectorName = element.fields.nom_realisateur
       film.address = element.fields.addresse_lieu
@@ -51,7 +53,7 @@ async function main(){
       film.year = element.fields.annee_tournage
       await film.save()
     })
-    console.log("All fims are imported.")
+    console.log("All films are imported.")
   }
 }
 
